@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\TrendKeyword;
 use Illuminate\Http\Request;
-
+use App\Models\TwitterAPI;
 class TrendKeywordController extends Controller
 {
+    private $t,$d;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,11 @@ class TrendKeywordController extends Controller
      */
     public function index()
     {
-        //
+        $t = new TwitterAPI();
+        $d = $t->searchTrends("1110809");
+        // $d = $t->serachTweets("金メダル");
+        return view('twitter',['twitter'=>$d]);
+
     }
 
     /**
