@@ -15,43 +15,42 @@ class TrendKeywordController extends Controller
      */
     public function index()
     {
-        $t = new TwitterAPI();
-        $d = $t->searchTrends("1110809");
-        // $d = $t->serachTweets("金メダル");
-        return view('twitter',['twitter'=>$d]);
+        $tweets = TrendKeyword::latest()->first();
+        $prev_id = $tweets->id - 1;
+        $next_id = NULL;
+        $keyword = $tweets->keyword;
+        $tweets = $tweets->getChildren;
+        return view('twitter',['tweets'=>$tweets,'keyword'=>$keyword,'prev_id'=>$prev_id,'next_id'=>$next_id]);
 
     }
+
+    public function show($trend_id){
+        $tweets = TrendKeyword::find($trend_id);
+        if($tweets){
+            $prev_id = $tweets->id - 1;
+            $next_id = $tweets->id + 1;
+            $keyword = $tweets->keyword;
+            $tweets = $tweets->getChildren;
+            return view('twitter',['tweets'=>$tweets,'keyword'=>$keyword,'prev_id'=>$prev_id,'next_id'=>$next_id]);
+        }
+        else{
+            return redirect('/');
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    //TrendKeywordを作成//
+    public function createTrendKeyword()
     {
-        //
-    }
+        $t = new TwitterAPI();
+        $d = $t->searchTrends("1110809");
+        $r = TrendKeyword::addKeyword($d);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TrendKeyword  $trendKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TrendKeyword $trendKeyword)
-    {
-        //
     }
 
     /**

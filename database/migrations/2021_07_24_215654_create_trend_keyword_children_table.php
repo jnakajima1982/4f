@@ -17,7 +17,7 @@ class CreateTrendKeywordChildrenTable extends Migration
             $table->id();
             $table->string('trend_keyword_id');
             $table->string('tweet_id');
-            $table->string('embedded_tag');
+            $table->string('tweet_user');
             $table->timestamps();
         });
     }

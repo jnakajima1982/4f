@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('twitter', 'App\Http\Controllers\TrendKeywordController@index');
+Route::get('/', 'App\Http\Controllers\TrendKeywordController@index');
+Route::get('trend/{trend_id?}', 'App\Http\Controllers\TrendKeywordController@show')->name('trend.show');
+Route::get('trendGet', 'App\Http\Controllers\TrendKeywordController@createTrendKeyword');

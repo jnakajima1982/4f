@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Support\Facades\Config;
+use App\Models\TrendKeyword;
+
 
 class TwitterAPI extends Model
 {
     use HasFactory;
-
     private $t;
     
     public function __construct()
@@ -22,7 +23,6 @@ class TwitterAPI extends Model
             Config::get('twitter.TOKEN'),
             Config::get('twitter.TOKEN_SECRET')
         );
-        // dd($this->t);
     }
     
     //ツイートトレンド取得
@@ -34,16 +34,16 @@ class TwitterAPI extends Model
         return $d[0]->trends;
     }
 
-
     // ツイート検索
     public function serachTweets(String $searchWord)
     {
         $d = $this->t->get("search/tweets", [
             'q' => $searchWord,
-            'count' => 3,
+            'count' => 4,
+            'lang' => 'ja',
+            'result_type' => 'mixed',
+            'min_faves' => 10,
         ]);
-        
-        dd($d);
-        // return $d->statuses;
+        return $d->statuses;
     }
 }
