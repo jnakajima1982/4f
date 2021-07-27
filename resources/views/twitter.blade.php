@@ -46,6 +46,9 @@
                 >
             </a>
         </div>
+        <div class="nav-bottom">
+            <p><a href="{{ route('trend.index') }}"> 4f </a></p>
+        </div>
         @isset($next_id)
         <div class="left-arrow">
             <a
