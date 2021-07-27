@@ -17,7 +17,11 @@
             rel="stylesheet"
             href="https://unpkg.com/ress/dist/ress.min.css"
         />
+        @if(app('env')=='local')
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        @else
+        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}" />
+        @endif
     </head>
     <body class="antialiased">
         <div class="container">
@@ -58,6 +62,10 @@
             src="https://platform.twitter.com/widgets.js"
             charset="utf-8"
         ></script>
+        @if(app('env')=='local')
         <script src="{{ asset('js/key.js') }}" charset="utf-8"></script>
+        @else
+        <script src="{{ secure_asset('js/key.js') }}" charset="utf-8"></script>
+        @endif
     </body>
 </html>
