@@ -22,7 +22,16 @@
   </head>
   <body class="antialiased">
     <div class="container">
-      <p class="title">{{ $keyword }}</p>
+      <p class="title">
+        {{ $keyword }}
+        <a
+          href="https://twitter.com/share"
+          class="twitter-share-button"
+          data-text="「{{ $keyword }}」のTwitterでのトレンド４コマ"
+          data-url="{{ route('trend.index') }}"
+          >Tweet</a
+        >
+      </p>
     </div>
     <div class="main">
       @foreach ($tweets as $tweet)
@@ -62,10 +71,21 @@
       src="https://platform.twitter.com/widgets.js"
       charset="utf-8"
     ></script>
+
     @if(app('env')=='local')
     <script src="{{ asset('js/key.js') }}" charset="utf-8"></script>
     @else
     <script src="{{ secure_asset('js/key.js') }}" charset="utf-8"></script>
+    @endif @if(app('env')=='local')
+    <script src="{{ asset('js/swipe.js') }}" charset="utf-8"></script>
+    @else
+    <script src="{{ secure_asset('js/swipe.js') }}" charset="utf-8"></script>
+    @endif
+    <strong></strong>
+    @if(app('env')=='local')
+    <script src="{{ asset('js/tweet.js') }}" charset="utf-8"></script>
+    @else
+    <script src="{{ secure_asset('js/tweet.js') }}" charset="utf-8"></script>
     @endif
   </body>
 </html>
