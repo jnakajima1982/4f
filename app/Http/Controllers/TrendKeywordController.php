@@ -15,7 +15,7 @@ class TrendKeywordController extends Controller
      */
     public function index()
     {
-        $tweets = TrendKeyword::latest()->first();
+        $tweets = TrendKeyword::orderBy('id','desc')->first();
         $prev_id = $tweets->id - 1;
         $next_id = NULL;
         $keyword = $tweets->keyword;
